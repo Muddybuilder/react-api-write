@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import {AddBlogPost} from "./NewPost";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
+  const [showAddForm, setShowAddForm] = useState(false);
+
+  const addNewPost = (newPost) => {
+    setShowAddForm(false);
+    fetchPosts();
+
+  };
 
   useEffect(() => {
     fetchPosts();
@@ -58,6 +66,11 @@ function Posts() {
           </li>
         ))}
       </ul>
+      {showAddForm ? (
+        <AddBlogPost onAddPost={addNewPost} />
+      ) : (
+        <button onClick={() => setShowAddForm(true)}>Add New Post</button>
+      )}
     </div>
   );
 }
