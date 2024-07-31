@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import {AddBlogPost} from "./NewPost";
+import { AddBlogPost } from "./NewPost";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -13,7 +13,6 @@ function Posts() {
   const addNewPost = (newPost) => {
     setShowAddForm(false);
     fetchPosts();
-
   };
 
   useEffect(() => {
@@ -21,15 +20,12 @@ function Posts() {
   }, []);
 
   const fetchPosts = async () => {
-    const headers = new Headers({ 'Authorization': `Bearer ${user.token}` }); 
+    const headers = new Headers({ Authorization: `Bearer ${user.token}` });
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/posts/user/myposts`,
-        {
-          method: "GET",
-          headers: headers,
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/posts`, {
+        method: "GET",
+        headers: headers,
+      });
       // if (!response.ok) {
       //   throw new Error("Network response was not ok");
       // }
@@ -55,11 +51,11 @@ function Posts() {
 
   return (
     <div>
-      <h1>Post Titles</h1>
+      <h1>Posts by {user.username}</h1>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <Link to={`/post/${post.id}`}>
+            <Link to={`/posts/${post.id}`}>
               {" "}
               {post.title} - {new Date(post.updatedAt).toLocaleDateString()}
             </Link>

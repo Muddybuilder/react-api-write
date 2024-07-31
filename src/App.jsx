@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/mypost"
+          path="/posts"
           element={
             <ProtectedRoute>
               <Posts />
@@ -23,7 +23,7 @@ function App() {
           }
         />
         <Route
-          path="/post/:postId"
+          path="/posts/:postId"
           element={
             <ProtectedRoute>
               <Post />

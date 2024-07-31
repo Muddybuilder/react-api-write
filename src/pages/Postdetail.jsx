@@ -31,7 +31,7 @@ function Post() {
           body: JSON.stringify({ title, content, published: true }),
         }
       );
-      if (!response.ok) throw new Error("Failed to update post");
+      if (!response.ok) throw new Error("Something went wrong");
       const updatedPost = await response.json();
       setIsEditing(false);
     } catch (err) {
@@ -58,8 +58,8 @@ function Post() {
           }
         );
   
-        if (!response.ok) throw new Error("Failed to delete post");
-        navigate("/mypost");
+        if (!response.ok) throw new Error("Something went wrong");
+        navigate("/posts");
       } catch (err) {
         setError(err.message);
       } finally {
@@ -77,13 +77,13 @@ function Post() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_ENDPOINT}/posts/user/myposts/${postId}`,
+        `${import.meta.env.VITE_API_ENDPOINT}/posts/${postId}`,
         {
           method: "GET",
           headers: headers,
         }
       );
-      if (!response.ok) throw new Error("Failed to delete post");
+      if (!response.ok) throw new Error("Something went wrong");
 
       const data = await response.json();
 

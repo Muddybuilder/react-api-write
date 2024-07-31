@@ -9,7 +9,7 @@ export const LoginPage = () => {
 
     console.log(email, password)
     const response = await fetch(
-      `${import.meta.env.VITE_API_ENDPOINT}/auth/login`,
+      `${import.meta.env.VITE_AUTH_API_ENDPOINT}/login`,
       {
         method:"POST",
         headers: {
