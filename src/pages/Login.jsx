@@ -7,7 +7,6 @@ export const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    console.log(email, password)
     const response = await fetch(
       `${import.meta.env.VITE_AUTH_API_ENDPOINT}/login`,
       {
@@ -23,7 +22,6 @@ export const LoginPage = () => {
       }
     const data = await response.json();
 
-    console.log(data);
     await login({token: data.token, username:data.userName});
 
     // Here you would usually send a request to your backend to authenticate the user
